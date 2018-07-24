@@ -25,7 +25,7 @@ namespace WebAssembly.JSInterop
         public static string InvokeJS(string str)
         {
             int exception = 0;
-            var res = InternalCalls.InvokeJS(str, out exception);
+            var res = Runtime.InvokeJS(str, out exception);
             if (exception != 0)
                 throw new JSException(res);
             return res;

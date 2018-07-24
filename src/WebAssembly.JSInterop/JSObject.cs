@@ -31,7 +31,7 @@ namespace WebAssembly.JSInterop
         public object Invoke(string method, params object[] args)
         {
             int exception = 0;
-            var res = InternalCalls.InvokeJSWithArgs(JSHandle, method, args, false, out exception);
+            var res = Runtime.InvokeJSWithArgs(JSHandle, method, args, out exception);
             if (exception != 0)
                 throw new JSException((string)res);
             return res;

@@ -75,11 +75,11 @@ debug/:
 release/:
 	mkdir -p $@
 
-debug/mono.wasm debug/mono.js: driver.o $(WASM_SDKS_DIR)/library_mono.js ./src/Mono/binding_support.js $(WASM_SDKS_DIR)/libmonosgen-2.0.a | debug/
-	$(EMCC) -g4 -Os -s WASM=1 -s ALLOW_MEMORY_GROWTH=1 -s BINARYEN=1 -s "BINARYEN_TRAP_MODE='clamp'" -s TOTAL_MEMORY=134217728 -s ALIASING_FUNCTION_POINTERS=0 -s ASSERTIONS=2 --js-library $(WASM_SDKS_DIR)/library_mono.js  --js-library ./src/Mono/binding_support.js $(BUILD_DIR)/driver.o $(WASM_SDKS_DIR)/libmonosgen-2.0.a -o debug/mono.js -s NO_EXIT_RUNTIME=1 -s "EXTRA_EXPORTED_RUNTIME_METHODS=$(EXTRA_EXPORTED_RUNTIME_METHODS)"
+debug/mono.wasm debug/mono.js: driver.o $(WASM_SDKS_DIR)/library_mono.js ./src/Mono/dotnet_support.js ./src/Mono/binding_support.js $(WASM_SDKS_DIR)/libmonosgen-2.0.a | debug/
+	$(EMCC) -g4 -Os -s WASM=1 -s ALLOW_MEMORY_GROWTH=1 -s BINARYEN=1 -s "BINARYEN_TRAP_MODE='clamp'" -s TOTAL_MEMORY=134217728 -s ALIASING_FUNCTION_POINTERS=0 -s ASSERTIONS=2 --js-library $(WASM_SDKS_DIR)/library_mono.js  --js-library ./src/Mono/dotnet_support.js --js-library ./src/Mono/binding_support.js $(BUILD_DIR)/driver.o $(WASM_SDKS_DIR)/libmonosgen-2.0.a -o debug/mono.js -s NO_EXIT_RUNTIME=1 -s "EXTRA_EXPORTED_RUNTIME_METHODS=$(EXTRA_EXPORTED_RUNTIME_METHODS)"
 
-release/mono.wasm release/mono.js: driver.o $(WASM_SDKS_DIR)/library_mono.js ./src/Mono/binding_support.js $(WASM_SDKS_DIR)/libmonosgen-2.0.a | release/
-	$(EMCC) -Oz --llvm-opts 2 --llvm-lto 1 -s WASM=1 -s ALLOW_MEMORY_GROWTH=1 -s BINARYEN=1 -s "BINARYEN_TRAP_MODE='clamp'" -s TOTAL_MEMORY=134217728 -s ALIASING_FUNCTION_POINTERS=0 --js-library $(WASM_SDKS_DIR)/library_mono.js  --js-library ./src/Mono/binding_support.js $(BUILD_DIR)/driver.o $(WASM_SDKS_DIR)/libmonosgen-2.0.a -o release/mono.js -s NO_EXIT_RUNTIME=1 -s "EXTRA_EXPORTED_RUNTIME_METHODS=$(EXTRA_EXPORTED_RUNTIME_METHODS)"
+release/mono.wasm release/mono.js: driver.o $(WASM_SDKS_DIR)/library_mono.js ./src/Mono/dotnet_support.js ./src/Mono/binding_support.js $(WASM_SDKS_DIR)/libmonosgen-2.0.a | release/
+	$(EMCC) -Oz --llvm-opts 2 --llvm-lto 1 -s WASM=1 -s ALLOW_MEMORY_GROWTH=1 -s BINARYEN=1 -s "BINARYEN_TRAP_MODE='clamp'" -s TOTAL_MEMORY=134217728 -s ALIASING_FUNCTION_POINTERS=0 --js-library $(WASM_SDKS_DIR)/library_mono.js  --js-library ./src/Mono/dotnet_support.js  --js-library ./src/Mono/binding_support.js $(BUILD_DIR)/driver.o $(WASM_SDKS_DIR)/libmonosgen-2.0.a -o release/mono.js -s NO_EXIT_RUNTIME=1 -s "EXTRA_EXPORTED_RUNTIME_METHODS=$(EXTRA_EXPORTED_RUNTIME_METHODS)"
 
 build/mono.js: $(DRIVER_CONF)/mono.js
 	cp $< $@

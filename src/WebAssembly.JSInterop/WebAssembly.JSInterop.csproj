@@ -5,6 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="TaskGenericsUtil.cs" />
+    <PackageReference Include="Microsoft.JSInterop" Version="0.5.0-preview1-10362" />
   </ItemGroup>
 </Project>

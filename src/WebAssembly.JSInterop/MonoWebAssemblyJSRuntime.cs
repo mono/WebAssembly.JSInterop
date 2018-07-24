@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
-
+using Microsoft.JSInterop;
 
 namespace WebAssembly.JSInterop
 {
